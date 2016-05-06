@@ -9,8 +9,8 @@ session_start();
 include "config.php";
 echo var_dump($_FILES);
 echo var_dump($_POST);
-if (isset($_FILES["uploadfile"])) {
-    $file = $_FILES['uploadfile'];
+if (isset($_FILES["file"])) {
+    $file = $_FILES['file'];
     if (!empty($file['name']))
     {
         ;
