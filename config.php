@@ -6,7 +6,7 @@
  * Time: 01:33
  */
 //
-$storage = "./img/";
+$storage = "/var/www/html/PicDrop/img/";
 $dbhost = "localhost";
 $dbuser = "picdrop";
 $dbname = "picdrop";

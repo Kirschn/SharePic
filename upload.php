@@ -22,12 +22,17 @@ if (isset($_FILES["file"])) {
         foreach (array_rand($seed, 5) as $k) $rand .= $seed[$k];
         $_SESSION["picdrop_lastUploadFileName"] = $rand;
         move_uploaded_file($file['tmp_name'], $storage."temp/".$rand);
+        $imagick = new Imagick();
         $imagick->readImage($storage."temp/".$rand);
         $imagick->writeImages($storage.$rand.".png", false); $imagick = new Imagick();
         echo "Upload ok";
         die();
 
+    } else {
+        echo "Not empty";
     }
+} else {
+    echo "Not set";
 }
 
 
