@@ -7,8 +7,6 @@ session_start();
  * Time: 01:32
  */
 include "config.php";
-echo var_dump($_FILES);
-echo var_dump($_POST);
 if (isset($_FILES["file"])) {
     $file = $_FILES['file'];
     if (!empty($file['name']))
@@ -21,18 +19,20 @@ if (isset($_FILES["file"])) {
         $rand = '';
         foreach (array_rand($seed, 5) as $k) $rand .= $seed[$k];
         $_SESSION["picdrop_lastUploadFileName"] = $rand;
-        move_uploaded_file($file['tmp_name'], $storage."temp/".$rand);
-        $imagick = new Imagick();
-        $imagick->readImage($storage."temp/".$rand);
-        $imagick->writeImages($storage.$rand.".png", false); $imagick = new Imagick();
-        echo "Upload ok";
+        if ($file["type"] == "image/gif") {
+            move_uploaded_file($file['tmp_name'], $storage.$rand.".gif");
+            echo $rand.".gif";
+        } else {
+            move_uploaded_file($file['tmp_name'], $storage."temp/".$rand);
+            $imagick = new Imagick();
+            $imagick->readImage($storage."temp/".$rand);
+            $imagick->writeImages($storage.$rand.".png", false); $imagick = new Imagick();
+            unlink($storage."temp/".$rand);
+            echo $rand.".png";
+        }
         die();
 
-    } else {
-        echo "Not empty";
     }
-} else {
-    echo "Not set";
 }
 
 
@@ -85,12 +85,98 @@ if (isset($_FILES["file"])) {
             vertical-align: middle;
 
         }
+        #drop {
+            height: 93%;
+            width: 100%;
+            position: absolute;
+            top: 7%;
+            text-align: center;
+        }
+        .dz-preview {
+            width: 100%;
+            text-align: center;
+            padding-top: 20%;
+        }
+        .dz-details {
+            position: absolute;
+            width: 100%;
+        }
+        .dz-image {
+            top: 20%;
+        }
+        .dz-upload {
+            display: none;
+        }
+        .dz-progress {
+            display: none;
+        }
+        .dz-success-mark {
+            display: none;
+        }
+        .dz-error-mark {
+            display: none;
+        }
+        .dz-error-message {
+            display: none;
+        }
+        #progress {
+            position: absolute;
+            left: 30%;
+            width: 40%;
+            height: 30px;
+            background-color: #ddd;
+            z-index: 1001;
+            border-radius: 0.2%;
+        }
+
+        #progressBar {
+            position: absolute;
+            width: 0;
+            height: 100%;
+            background-color: #4CAF50;
+        }
+
+        #progressBarLabel {
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
     </style>
     <script src="dropzone.js"></script>
     <script>
         function startDrop() {
-            var myDropzone = new Dropzone("div#uploadcontainer", { url: "upload.php", autoProcessQueue: true});
+            var uploader = new Dropzone("div#drop", { url: "upload.php",
+                maxFilesize: 30,
+                autoProcessQueue: true,
+                parallelUploads: 1,
+                acceptedFiles: "image/*,application/pdf"
+                });
+            uploader.on("sending", function(file, xhr, formData) {
+               console.log("Filesize: " + file.size);
+            });
+            uploader.on("uploadprogress", function (progress, bytesSent) {
+                console.log("Progress: " + progress.upload.progress);
+                if (progress.upload.progress !== 100) {
+                    document.getElementById("progressBar").style.width = progress.upload.progress + "%";
+                    document.getElementById("progressBarLabel").innerHTML = Math.floor(progress.upload.progress) + "%";
+                } else {
+                    document.getElementById("progressBar").style.width = "100%";
+                    document.getElementById("progressBarLabel").innerHTML = "Processing...";
+                }
+            });
+            uploader.on("success", function (file, response) {
+               console.log(response);
+                document.getElementById("progressBarLabel").innerHTML = "Ready!";
+                document.getElementsByClassName("dz-filename")[0].innerHTML = "<br>Your Image can be found here: <a href='view.php?q=" + response +"'>picdrop.tk/view.php?q="+response+"</a>";
+                uploader.disable();
+            });
+            uploader.on("addedfile", function (file) {
+                document.getElementsByClassName("innerText")[0].innerHTML = "";
+                uploader.clickable = false;
+                document.getElementsByClassName("dz-filename")[0].innerHTML += '\n<div id="progress"><div id="progressBar"><div id="progressBarLabel">0%</div></div></div>';
+            })
         }
+
     </script>
 </head>
 <body onload="startDrop()">
@@ -104,9 +190,12 @@ if (isset($_FILES["file"])) {
     <div class="innerText">
         <h1><i class="fa fa-picture-o" aria-hidden="true"></i></h1>
         Drop an Image here
-        <span style="font-size: 18pt;"><br>or Upload</span>
-        <span id="progress"></span>
+        <span style="font-size: 18pt;"><br>or select one by clicking</span>
     </div>
 </div>
+<div id="drop">
+
+</div>
+
 </body>
 </html>
