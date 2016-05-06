@@ -192,7 +192,7 @@ if (isset($_FILES["file"])) {
 <div class="header">
     <span class="ycenter">
         <b>PicDrop</b>
-        <div style="text-align: right; width: 70%"><a href="index.php">Upload</a></div>
+        <div style="text-align: right; width: 70%"><a href="/">Upload</a></div>
     </span>
 </div>
 <div class="uploadcontainer" id="uploadcontainer">
