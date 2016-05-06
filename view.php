@@ -7,7 +7,7 @@
  */
 if (isset($_GET["q"])) {
 if (!empty($_GET["q"])) {
-    $_GET["q"] = str_replace("/","", $_GET["q"]);
+    $_GET["q"] = substr_replace($_GET["q"],"/", 0, 1);
     include "config.php";
     $sqlconnection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
     $sqlconnection->set_charset("utf8");
