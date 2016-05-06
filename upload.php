@@ -1,5 +1,4 @@
 <?php
-session_start();
 /**
  * Created by PhpStorm.
  * User: mcwmc
@@ -9,35 +8,45 @@ session_start();
 include "config.php";
 if (isset($_FILES["file"])) {
     $file = $_FILES['file'];
-    if (!empty($file['name']))
+    if (!empty($file['name']) && (strpos($file["type"], "image/") !== false))
     {
-        ;
         $seed = str_split('abcdefghijklmnopqrstuvwxyz'
             .'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-            .'0123456789'); // and any other characters
-        shuffle($seed); // probably optional since array_is randomized; this may be redundant
+            .'0123456789');
+        shuffle($seed);
         $rand = '';
         foreach (array_rand($seed, 5) as $k) $rand .= $seed[$k];
-        $_SESSION["picdrop_lastUploadFileName"] = $rand;
+        $filename = "";
         if ($file["type"] == "image/gif") {
-            move_uploaded_file($file['tmp_name'], $storage.$rand.".gif");
-            echo $rand.".gif";
+            move_uploaded_file($file['tmp_name'], $storage . $rand . ".gif");
+            $filename = $rand . ".gif";
+        } elseif ($file["type"] == "image/png") {
+            move_uploaded_file($file['tmp_name'], $storage . $rand . ".png");
+            $filename = $rand . ".png";
+        } elseif ($file["type"] == "image/jpeg") {
+            move_uploaded_file($file['tmp_name'], $storage . $rand . ".jpg");
+            $filename = $rand . ".jpg";
         } else {
-            move_uploaded_file($file['tmp_name'], $storage."temp/".$rand);
+            move_uploaded_file($file['tmp_name'], $tmpdir.$rand);
             $imagick = new Imagick();
-            $imagick->readImage($storage."temp/".$rand);
+            $imagick->readImage($tmpdir.$rand);
             $imagick->writeImages($storage.$rand.".png", false); $imagick = new Imagick();
-            unlink($storage."temp/".$rand);
-            echo $rand.".png";
+            unlink($tmpdir.$rand);
+            $filename = $rand.".png";
         }
+        $sqlconnection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+        $sqlconnection->set_charset("utf8");
+        $sql = "INSERT INTO images (uniqid, imageurl) VALUES (\"".mysqli_real_escape_string($sqlconnection, $rand)."\", \"".mysqli_real_escape_string($sqlconnection, $cdnhostname.$filename)."\");";
+        mysqli_query($sqlconnection, $sql);
+        mysqli_close($sqlconnection);
+        echo $rand;
         die();
 
     }
 }
 
 
-//$sqlconnection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-//$sqlconnection->set_charset("utf8");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -183,7 +192,7 @@ if (isset($_FILES["file"])) {
 <div class="header">
     <span class="ycenter">
         <b>PicDrop</b>
-        <div style="text-align: right; width: 70%">lololo</div>
+        <div style="text-align: right; width: 70%"><a href="index.php">Upload</a></div>
     </span>
 </div>
 <div class="uploadcontainer" id="uploadcontainer">
