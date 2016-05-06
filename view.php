@@ -7,7 +7,9 @@
  */
 if (isset($_GET["q"])) {
 if (!empty($_GET["q"])) {
-    $_GET["q"] = substr_replace($_GET["q"],"/", 0, 1);
+    if (substr($_GET["q"], 0, 1) == "/") {
+        $_GET["q"] = substr($_GET["q"], 1);
+    }
     include "config.php";
     $sqlconnection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
     $sqlconnection->set_charset("utf8");
@@ -94,8 +96,7 @@ if (!empty($_GET["q"])) {
         <?php
     } else { ?>
             <h1><i class="fa fa-picture-o" aria-hidden="true"></i></h1>
-            Couldn't find this image :c
-            <span style="font-size: 18pt;"><br>or select one by clicking</span> <?php } ?>
+            Couldn't find this image :c<?php } ?>
         </div>
     </div>
     <div id="drop">
