@@ -199,7 +199,7 @@ if (isset($_FILES["file"])) {
     <div class="innerText">
         <h1><i class="fa fa-picture-o" aria-hidden="true"></i></h1>
         Drop an Image here
-        <span style="font-size: 18pt;"><br>or select one by clicking</span>
+        <span style="font-size: 18pt;"><br>or select one by clicking. <br> By uploading content, you accept our Terms of service.</span>
     </div>
 </div>
 <div id="drop">
