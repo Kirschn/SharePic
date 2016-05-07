@@ -95,7 +95,7 @@ if (!empty($_GET["q"])) {
         <div class="innerText">
             <?php if (isset($result["imageurl"])) {
             ?>
-                <img class="lepicture" src="//<?php echo $result["imageurl"]; ?>">
+                <a href="//<?php echo $result["imageurl"]; ?>/raw"><img class="lepicture" src="//<?php echo $result["imageurl"]; ?>"></a>
         <?php
     } else { ?>
             <h1><i class="fa fa-picture-o" aria-hidden="true"></i></h1>
