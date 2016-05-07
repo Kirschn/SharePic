@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+            background: #BFBFBF;
+        }
+        .header {
+            display: table;
+            background: white;
+            position: absolute;
+            height: 7%;
+            width: 85%;
+            box-shadow: 0 20px 75px gray;
+            color: black;
+            z-index: 100;
+            line-height: 7%;
+            border-bottom: 1px solid grey;
+            padding-left: 15%;
+        }
+        .uploadcontainer {
+            text-align: center;
+            top: 7%;
+            z-index: 0;
+            background: #BFBFBF;
+            color: grey;
+            position: absolute;
+            height: 93%;
+            width: 100%;
+        }
+        .innerText {
+            text-align: left;
+            width: 60%;
+            position: absolute;
+            top: 20%;
+            font-size: 18pt;
+            padding-left: 20%;
+            padding-right: 20%;
+            
+        }
+        .ycenter {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+<div class="header">
+    <span class="ycenter">
+        <b>PicDrop</b>
+        <div style="text-align: right; width: 70%"><a href="legal.html">Legal / TOS</a> <a href="/">Upload</a></div>
+    </span>
+</div>
+<div class="uploadcontainer" id="uploadcontainer">
+    <div class="innerText">
+        <h2>FAQ:</h2><br>
+        <ul>
+            <li>
+                <h3>Which image formats can I upload to PicDrop?</h3><br>
+                Without Transcoding (Auto-Convert): .PNG, .JP(E)G, .GIF (either animated or not)
+            </li>
+            <li>
+                <h3>Am I allowed to integrate PicDrop into my application? If yes, how?</h3><br>
+                For sure! Just POST your HTML File Object Data to http://picdrop.com/upload.php in the field "file".<br>
+                It will return the ID of the image.<br>
+                The Image will be available under these URLS: <br><ul><li>http://picdrop.tk/myID1 (HTML Preview Page)</li>
+                <li>http://picdrop.tk/myID1/raw (Will return a 302 Header to the location of the Image in our CDN)</li></ul>
+            </li>
+            <li>
+                <h3>Can I auto-upload Images from ShareX to PicDrop?</h3><br>
+                Yup! But it's dangerous to go alone, take this <a href="http://picdrop.tk/KnH58">http://picdrop.tk/KnH58</a> and this <a href="http://picdrop.tk/sharex.json">http://picdrop.tk/sharex.json</a>
+            </li>
+            <li>
+              <h3>SSL?</h3><br>
+              Soon™
+            </li>
+              
+    </div>
+</div>
+</body>
+</html>
