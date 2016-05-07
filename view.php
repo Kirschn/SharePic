@@ -65,7 +65,7 @@ if (!empty($_GET["q"])) {
                 text-align: center;
                 width: 100%;
                 position: absolute;
-                top: 20%;
+                top: 10%;
                 font-size: 40pt;
             }
             .lepicture {
