@@ -90,7 +90,7 @@ if (!empty($_GET["q"])) {
         <div class="innerText">
             <?php if (isset($result["imageurl"])) {
             ?>
-                <a href="//<?php echo $result["imageurl"]; ?>/raw"><img class="lepicture" src="//<?php echo $result["imageurl"]; ?>"></a>
+                <a href="//<?php echo "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>/raw"><img class="lepicture" src="//<?php echo $result["imageurl"]; ?>"></a>
         <?php
     } else { ?>
             <h1>404</h1>
