@@ -66,11 +66,10 @@ if (!empty($_GET["q"])) {
                 position: absolute;
                 top: 20%;
                 font-size: 40pt;
-
+            }
             .lepicture {
                 text-align: center;
                 max-width: 90%;
-            }
             }
             .ycenter {
                 display: table-cell;
