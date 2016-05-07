@@ -49,6 +49,7 @@ if (!empty($_GET["q"])) {
                 line-height: 7%;
                 border-bottom: 1px solid grey;
                 padding-left: 15%;
+                background: #BFBFBF;
             }
             .uploadcontainer {
                 top: 7%;
@@ -68,6 +69,7 @@ if (!empty($_GET["q"])) {
 
             .lepicture {
                 text-align: center;
+                max-width: 90%;
             }
             }
             .ycenter {
@@ -92,7 +94,7 @@ if (!empty($_GET["q"])) {
         <div class="innerText">
             <?php if (isset($result["imageurl"])) {
             ?>
-                <img src="//<?php echo $result["imageurl"]; ?>">
+                <img class="lepicture" src="//<?php echo $result["imageurl"]; ?>">
         <?php
     } else { ?>
             <h1><i class="fa fa-picture-o" aria-hidden="true"></i></h1>
