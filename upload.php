@@ -176,7 +176,7 @@ if (isset($_FILES["file"])) {
             uploader.on("success", function (file, response) {
                console.log(response);
                 document.getElementById("progressBarLabel").innerHTML = "Ready!";
-                document.getElementsByClassName("dz-filename")[0].innerHTML = "<br>Share this link with your friends: <a href='/" + response +"'>picdrop.tk/"+response+"</a>";
+                document.getElementsByClassName("dz-filename")[0].innerHTML = "<br>Share this link with your friends: <a href='/" + response +"'>picdrop.tk/"+response+"</a><br>or this one if you want the raw image:  <a href='/" + response +"/raw'>picdrop.tk/"+response+"/raw</a>";
                 uploader.disable();
             });
             uploader.on("addedfile", function (file) {
