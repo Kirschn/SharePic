@@ -51,6 +51,7 @@ if (!empty($_GET["q"])) {
                 border-bottom: 1px solid grey;
                 padding-left: 15%;
                 background: #BFBFBF;
+                z-index: 100;
             }
             .uploadcontainer {
                 top: 7%;
