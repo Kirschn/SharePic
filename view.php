@@ -50,7 +50,6 @@ if (!empty($_GET["q"])) {
                 line-height: 7%;
                 border-bottom: 1px solid grey;
                 padding-left: 15%;
-                background: #BFBFBF;
                 z-index: 100;
             }
             .uploadcontainer {
@@ -79,10 +78,6 @@ if (!empty($_GET["q"])) {
 
             }
         </style>
-        <script>
-
-
-        </script>
     </head>
     <body>
     <div class="header">
@@ -98,7 +93,7 @@ if (!empty($_GET["q"])) {
                 <a href="//<?php echo $result["imageurl"]; ?>/raw"><img class="lepicture" src="//<?php echo $result["imageurl"]; ?>"></a>
         <?php
     } else { ?>
-            <h1><i class="fa fa-picture-o" aria-hidden="true"></i></h1>
+            <h1>404</h1>
             Couldn't find this image :c<?php } ?>
         </div>
     </div>
