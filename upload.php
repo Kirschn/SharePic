@@ -191,7 +191,7 @@ if (isset($_FILES["file"])) {
 <body onload="startDrop()">
 <div class="header">
     <span class="ycenter">
-        <b>PicDrop</b>
+        <b>SharePic</b>
         <div style="text-align: right; width: 70%"><a href="faq.html">FAQ</a> | <a href="legal.html">Legal / TOS</a> | <a href="/">Upload</a></div>
     </span>
 </div>
