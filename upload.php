@@ -154,7 +154,7 @@ if (isset($_FILES["file"])) {
     <script src="dropzone.js"></script>
     <script>
         function startDrop() {
-            var uploader = new Dropzone("div#drop", { url: "upload.php",
+            var uploader = new Dropzone("div#drop", { url: "http://mun-1.cdn.spaceflow.io/upload",
                 maxFilesize: 30,
                 autoProcessQueue: true,
                 parallelUploads: 1,
@@ -176,6 +176,7 @@ if (isset($_FILES["file"])) {
             uploader.on("success", function (file, response) {
                console.log(response);
                 document.getElementById("progressBarLabel").innerHTML = "Ready!";
+                response = JSON.parse(response)["cdnFilename"];
                 document.getElementsByClassName("dz-filename")[0].innerHTML = "<br>Share this link with your friends: <a href='/" + response +"'>sharepic.moe/"+response+"</a><br>or this one if you want the raw image:  <a href='/" + response +"/raw'>sharepic.moe/"+response+"/raw</a>";
                 uploader.disable();
             });
