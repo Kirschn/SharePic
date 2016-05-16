@@ -4,7 +4,7 @@
  * User: mcwmc
  * Date: 06.05.2016
  * Time: 01:32
- */
+
 include "config.php";
 if (isset($_FILES["file"])) {
     $file = $_FILES['file'];
@@ -46,7 +46,7 @@ if (isset($_FILES["file"])) {
 }
 
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -155,6 +155,7 @@ if (isset($_FILES["file"])) {
     <script>
         function startDrop() {
             var uploader = new Dropzone("div#drop", { url: "http://mun-1.cdn.spaceflow.io/upload",
+                paramName: "fileUpload",
                 maxFilesize: 30,
                 autoProcessQueue: true,
                 parallelUploads: 1,
