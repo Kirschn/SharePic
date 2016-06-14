@@ -1,4 +1,4 @@
 # SharePic
 Quick Image Uploader
 
-# Legancy Code, Project fusioned with Spaceflow/CDN
+# Legacy Code, Project fusioned with Spaceflow/CDN
