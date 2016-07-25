@@ -4,7 +4,7 @@
  * User: mcwmc
  * Date: 06.05.2016
  * Time: 01:32
-
+*/
 include "config.php";
 if (isset($_FILES["file"])) {
     $file = $_FILES['file'];
@@ -46,7 +46,6 @@ if (isset($_FILES["file"])) {
 }
 
 
-*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -54,6 +53,7 @@ if (isset($_FILES["file"])) {
     <meta charset="UTF-8">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <style>
         body {
             margin: 0;
@@ -151,11 +151,11 @@ if (isset($_FILES["file"])) {
             color: white;
         }
     </style>
-    <script src="dropzone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
     <script>
         function startDrop() {
-            var uploader = new Dropzone("div#drop", { url: "http://mun-1.cdn.spaceflow.io/upload",
-                paramName: "fileUpload",
+            var uploader = new Dropzone("div#drop", { url: "http://sharepic.moe/upload.php",
+                paramName: "file",
                 maxFilesize: 30,
                 autoProcessQueue: true,
                 parallelUploads: 1,
@@ -177,7 +177,7 @@ if (isset($_FILES["file"])) {
             uploader.on("success", function (file, response) {
                console.log(response);
                 document.getElementById("progressBarLabel").innerHTML = "Ready!";
-                response = JSON.parse(response)["cdnFilename"];
+                //response = JSON.parse(response)["cdnFilename"];
                 document.getElementsByClassName("dz-filename")[0].innerHTML = "<br>Share this link with your friends: <a href='/" + response +"'>sharepic.moe/"+response+"</a><br>or this one if you want the raw image:  <a href='/" + response +"/raw'>sharepic.moe/"+response+"/raw</a>";
                 uploader.disable();
             });

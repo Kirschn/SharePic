@@ -1,0 +1,12 @@
+﻿{
+  "Name": "SharePic.moe (puush-like)",
+  "RequestType": "POST",
+  "RequestURL": "https://sharepic.moe/upload.php",
+  "FileFormName": "file",
+  "ResponseType": "Text",
+  "RegexList": [
+    "(.+)"
+  ],
+  "URL": "https://sharepic.moe/$regex:1$/raw",
+  "ThumbnailURL": "https://sharepic.moe/$regex:1$/raw"
+}
