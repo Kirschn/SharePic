@@ -154,7 +154,7 @@ if (isset($_FILES["file"])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
     <script>
         function startDrop() {
-            var uploader = new Dropzone("div#drop", { url: "http://sharepic.moe/upload.php",
+            var uploader = new Dropzone("div#drop", { url: "https://sharepic.moe/upload.php",
                 paramName: "file",
                 maxFilesize: 30,
                 autoProcessQueue: true,
