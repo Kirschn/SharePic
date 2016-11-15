@@ -8,7 +8,7 @@
 include "config.php";
 if (isset($_FILES["file"])) {
     $file = $_FILES['file'];
-    if (!empty($file['name']) && (strpos($file["type"], "image/") !== false))
+    if (!empty($file['name']) && ((strpos($file["type"], "image/") !== false) || (strpos($file["type"], "audio/webm") !== false) || (strpos($file["type"], "video/webm") !== false) && (strpos($file["type"], "video/mp4") !== false)))
     {
         $seed = str_split('abcdefghijklmnopqrstuvwxyz'
             .'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -26,6 +26,12 @@ if (isset($_FILES["file"])) {
         } elseif ($file["type"] == "image/jpeg") {
             move_uploaded_file($file['tmp_name'], $storage . $rand . ".jpg");
             $filename = $rand . ".jpg";
+        } elseif ($file["type"] == "audio/webm" || $file["type"] == "video/webm") {
+            move_uploaded_file($file['tmp_name'], $storage . $rand . ".webm");
+            $filename = $rand . ".webm";
+        } elseif ($file["type"] == "video/mp4") {
+            move_uploaded_file($file['tmp_name'], $storage . $rand . ".mp4");
+            $filename = $rand . ".mp4";
         } else {
             move_uploaded_file($file['tmp_name'], $tmpdir.$rand);
             $imagick = new Imagick();
