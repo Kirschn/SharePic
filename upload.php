@@ -165,7 +165,7 @@ if (isset($_FILES["file"])) {
                 maxFilesize: 30,
                 autoProcessQueue: true,
                 parallelUploads: 1,
-                acceptedFiles: "image/*,application/pdf"
+                acceptedFiles: "image/*,video/webm,video/mp4"
                 });
             uploader.on("sending", function(file, xhr, formData) {
                console.log("Filesize: " + file.size);
