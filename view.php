@@ -15,13 +15,13 @@ if (!empty($_GET["q"])) {
     $sqlconnection->set_charset("utf8");
     if ((strpos($_GET["q"], "/raw") !== false)) {
         $imgid = mysqli_real_escape_string($sqlconnection, explode("/", $_GET["q"])[0]);
-        $sql = "SELECT imageurl, video FROM images WHERE uniqid='$imgid';";
+        $sql = "SELECT imageurl FROM images WHERE uniqid='$imgid';";
         $result = mysqli_fetch_assoc(mysqli_query($sqlconnection, $sql));
         header("Location: //".$result["imageurl"]);
         die();
     }
     $imgid = mysqli_real_escape_string($sqlconnection, $_GET["q"]);
-    $sql = "SELECT imageurl FROM images WHERE uniqid='$imgid';";
+    $sql = "SELECT imageurl, video FROM images WHERE uniqid='$imgid';";
     $result = mysqli_fetch_assoc(mysqli_query($sqlconnection, $sql));
 
 ?>
