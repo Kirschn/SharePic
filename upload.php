@@ -8,7 +8,7 @@
 include "config.php";
 if (isset($_FILES["file"])) {
     $file = $_FILES['file'];
-    if (!empty($file['name']) && ((strpos($file["type"], "image/") !== false) || (strpos($file["type"], "audio/webm") !== false) || (strpos($file["type"], "video/webm") !== false) && (strpos($file["type"], "video/mp4") !== false)))
+    if (!empty($file['name']) && ((strpos($file["type"], "image/") !== false) || (strpos($file["type"], "video/") !== false)))
     {
         $seed = str_split('abcdefghijklmnopqrstuvwxyz'
             .'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
