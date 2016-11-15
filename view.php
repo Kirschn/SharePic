@@ -15,7 +15,7 @@ if (!empty($_GET["q"])) {
     $sqlconnection->set_charset("utf8");
     if ((strpos($_GET["q"], "/raw") !== false)) {
         $imgid = mysqli_real_escape_string($sqlconnection, explode("/", $_GET["q"])[0]);
-        $sql = "SELECT imageurl FROM images WHERE uniqid='$imgid';";
+        $sql = "SELECT imageurl, video FROM images WHERE uniqid='$imgid';";
         $result = mysqli_fetch_assoc(mysqli_query($sqlconnection, $sql));
         header("Location: //".$result["imageurl"]);
         die();
@@ -89,9 +89,15 @@ if (!empty($_GET["q"])) {
     <div class="uploadcontainer" id="uploadcontainer">
         <div class="innerText">
             <?php if (isset($result["imageurl"])) {
+               if ($result["video"]) {
+            ?>
+                <a href="//<?php echo "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>/raw"><video class="lepicture"><source src="//<?php echo $result["imageurl"]; ?>"></video></a>
+        <?php       
+               } else {
             ?>
                 <a href="//<?php echo "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>/raw"><img class="lepicture" src="//<?php echo $result["imageurl"]; ?>"></a>
         <?php
+               }
     } else { ?>
             <h1>404</h1>
             Couldn't find this image :c<?php } ?>
