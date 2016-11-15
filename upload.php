@@ -17,6 +17,7 @@ if (isset($_FILES["file"])) {
         $rand = '';
         foreach (array_rand($seed, 5) as $k) $rand .= $seed[$k];
         $filename = "";
+        $video = 0;
         if ($file["type"] == "image/gif") {
             move_uploaded_file($file['tmp_name'], $storage . $rand . ".gif");
             $filename = $rand . ".gif";
@@ -26,12 +27,14 @@ if (isset($_FILES["file"])) {
         } elseif ($file["type"] == "image/jpeg") {
             move_uploaded_file($file['tmp_name'], $storage . $rand . ".jpg");
             $filename = $rand . ".jpg";
-        } elseif ($file["type"] == "audio/webm" || $file["type"] == "video/webm") {
+        } elseif ($file["type"] == "video/webm") {
             move_uploaded_file($file['tmp_name'], $storage . $rand . ".webm");
             $filename = $rand . ".webm";
+            $video = true;
         } elseif ($file["type"] == "video/mp4") {
             move_uploaded_file($file['tmp_name'], $storage . $rand . ".mp4");
             $filename = $rand . ".mp4";
+            $video = true;
         } else {
             move_uploaded_file($file['tmp_name'], $tmpdir.$rand);
             $imagick = new Imagick();
@@ -42,7 +45,7 @@ if (isset($_FILES["file"])) {
         }
         $sqlconnection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
         $sqlconnection->set_charset("utf8");
-        $sql = "INSERT INTO images (uniqid, imageurl) VALUES (\"".mysqli_real_escape_string($sqlconnection, $rand)."\", \"".mysqli_real_escape_string($sqlconnection, $cdnhostname.$filename)."\");";
+        $sql = "INSERT INTO images (uniqid, imageurl, video) VALUES (\"".mysqli_real_escape_string($sqlconnection, $rand)."\", \"".mysqli_real_escape_string($sqlconnection, $cdnhostname.$filename)."\", ".$video.");";
         mysqli_query($sqlconnection, $sql);
         mysqli_close($sqlconnection);
         echo $rand;
