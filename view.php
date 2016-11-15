@@ -91,7 +91,7 @@ if (!empty($_GET["q"])) {
             <?php if (isset($result["imageurl"])) {
                if ($result["video"]) {
             ?>
-                <a href="//<?php echo "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>/raw"><video class="lepicture"><source src="//<?php echo $result["imageurl"]; ?>"></video></a>
+                <a href="//<?php echo "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>/raw"><video class="lepicture" controls autoplay><source src="//<?php echo $result["imageurl"]; ?>"></video></a>
         <?php       
                } else {
             ?>
