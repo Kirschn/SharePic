@@ -165,7 +165,7 @@ if (isset($_FILES["file"])) {
         function startDrop() {
             var uploader = new Dropzone("div#drop", { url: "https://sharepic.moe/upload.php",
                 paramName: "file",
-                maxFilesize: 30,
+                maxFilesize: 16,
                 autoProcessQueue: true,
                 parallelUploads: 1,
                 acceptedFiles: "image/*,video/webm,video/mp4"
