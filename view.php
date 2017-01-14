@@ -31,6 +31,12 @@ if (!empty($_GET["q"])) {
         <meta charset="UTF-8">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@sharepicmoe">
+        <meta name="twitter:creator" content="@theKirschn">
+        <meta name="twitter:title" content="SharePic">
+        <meta name="twitter:description" content="Quick Image Uploader">
+        <meta name="twitter:image" content="https://<?php echo $result["imageurl"]; ?>">
         <style>
             body {
                 margin: 0;
